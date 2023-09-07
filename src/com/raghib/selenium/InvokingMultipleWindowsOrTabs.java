@@ -29,6 +29,7 @@ public class InvokingMultipleWindowsOrTabs extends BaseClass  {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		driver.manage().window().maximize();
 		driver.get(location1);
+		System.out.println("Parent Window Title : "+driver.getTitle());
 		
 		//INVOKING BROWSER
 		driver.switchTo().newWindow(WindowType.TAB);
@@ -49,11 +50,13 @@ public class InvokingMultipleWindowsOrTabs extends BaseClass  {
 		driver.switchTo().window(childWindowId);
 
 		driver.get(location2);
+		System.out.println("Child Window Title : "+driver.getTitle());
 		String courseName = driver.findElements(By.cssSelector(courseCssSelector)).get(1).getText();
 		System.out.println("courseName : " + courseName);
 		
 		//Switching From Child Browser To Parent Browser.
 		driver.switchTo().window(parentWindowId);
+		System.out.println("Parent Window Title : "+driver.getTitle());
 
 		driver.findElement(By.xpath(nameBoxXPath)).sendKeys(courseName);
 
